@@ -49,5 +49,5 @@ def upload():
     return render_template('upload.html', answer = answer, lead_section = lead_section)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+'''if __name__ == "__main__":
+    app.run(debug=False, host = '0.0.0.0')'''
