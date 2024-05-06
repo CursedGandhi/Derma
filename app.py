@@ -1,7 +1,10 @@
 from flask import Flask, url_for, render_template, redirect, request
 import os
 import wikipedia
-import random
+import numpy as np
+import tensorflow as tf
+from PIL import Image
+from numpy import array
 
 app = Flask(__name__)
 
@@ -30,7 +33,6 @@ def upload():
         return "No file part"
     
     file = request.files['image']
-    
     if file.filename == '':
         return "No selected file"
     
@@ -40,14 +42,25 @@ def upload():
     # Save the file with a static filename 'image' and the original file extension
     filename = 'image' + file_extension
     file.save(os.path.join('uploads', filename))
+    ans = process(os.path.join('uploads', filename))
+    disease_list = ['Eczema', 'Melanoma', 'Atopic Dermatitis', 'Basal-cell carcinoma', 'Melanocytic nevus',  'Keratosis', 'Psoriasis', 'Seborrheic keratosis', 'Tinea Corporis', 'Molluscum contagiosum']
 
-    disease_list = ['Melanoma', 'Melanocytic nevus', 'Basal-cell carcinoma', 'Actinic keratosis', 'Seborrheic keratosis', 'Dermatofibroma', 'Hemangioma', 'Squamous-cell carcinoma']
-
-    answer = random.choice(disease_list)
+    answer = disease_list[ans]
     lead_section = wikipedia.summary(answer)
     # Optionally, you can redirect to another page after successful upload
     return render_template('upload.html', answer = answer, lead_section = lead_section)
 
+def process(image_path):
+    model=tf.keras.models.load_model(r'model.h5')
+    image_arrays = list(np.asarray(Image.open(image_path).resize((100,75))))
+    image_arrays = np.reshape(image_arrays, (-1, 75, 100, 3))  # -1 infers batch size
+    a = array(image_arrays)
+    a = a.reshape(a.shape[0], *(75, 100, 3))
+    x_train_mean = np.mean(a)
+    x_train_std = np.std(a)
+    a = (a - x_train_mean)/x_train_std
 
-'''if __name__ == "__main__":
-    app.run(debug=False, host = '0.0.0.0')'''
+    data = model.predict(a)
+    return(np.argmax((data)))
+if __name__ == "__main__":
+    app.run(debug=True)
