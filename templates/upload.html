@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        body{
+            padding-top: 150px;
+        }
+    </style>
+    <title>DERMA - Result</title>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class = "container align-item-center info">
+        <div class="card">
+            <h5 class="card-header">{{ answer }}</h5>
+            <div class="card-body">
+              <h5 class="card-title">Here's some more information:</h5>
+              <p class="card-text">{{ lead_section }}</p>
+              <a href="https://en.wikipedia.org/wiki/{{ answer }}" class="btn btn-primary">Read More on Wikipedia</a>
+            </div>
+        </div>
+        </div>
+    </main>
+{% endblock %}

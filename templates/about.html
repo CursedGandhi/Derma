@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        body{
+            padding-top: 50px;
+        }
+    </style>
+    <title>DERMA - About</title>
+{% endblock %}
+{% block body %}
+    <main>
+        <br><br><br><br>
+        <div class="container text-center frame">
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                  <img src="{{url_for('static', filename = 'images/accuracy.png')}}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <p class="card-text">The general validity of the model's predictions is gauged by its <strong>Accuracy</strong>. The goal is to maximize it. It is calculated by taking the ratio of accurately predicted instances to all instances. </p>
+                    <img src = "{{url_for('static', filename = 'images/accuracyform.png')}}" class = "card-img-bottom">
+                  </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img src="{{url_for('static', filename = 'images/loss.png')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text"><strong>Loss</strong> is the measure of difference between predicted values and actual values. The goal of training is to minimize the loss value. For this model, we are using the categorical cross-entropy loss function which is used for classification problems.</p>
+                  <img src = "{{url_for('static', filename = 'images/lossform.jpg')}}" class = "card-img-bottom">
+                </div>
+            </div>
+            </div>
+          </div>
+    </main>
+{% endblock %}

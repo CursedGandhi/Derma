@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body{
+        padding-top: 150px;
+    }
+</style>
+<title>DERMA</title>
+{% endblock %}
+
+{% block body %}
+<main class = frame>
+    
+    <div class="container align-items-center">
+      <!-- START THE FEATURETTES -->
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">What are we dealing with?</h2>
+            <p class="lead">The Global Burden of Disease project reveals skin diseases as the 4th leading cause of
+              nonfatal disease worldwide. These conditions often lead to severe systemic illnesses
+              like HIV and neglected tropical diseases. However, providing effective dermatological
+              care in under-served regions is challenging due to inadequate diagnostic tools, poor
+              infrastructure, and scarcity of trained physicians.</p>
+          </div>
+          <div class="col-md-5">
+            <img src="{{url_for('static', filename = 'images/graph.png')}}" class = "img-fluid" >
+          </div>
+        </div>
+        <br>
+        <div>
+          <a class="btn btn-outline-dark" href = "{{url_for('help')}}" role = "button">Check out more resources!</a>
+        </div>
+        <hr class="featurette-divider">
+    
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">How do we do it?</h2>
+            <p class="lead">Derma is a cross-platform web application designed to aid in the examination
+              and detection of dermatological diseases. It empowers users to capture images of
+              affected areas on a patient's skin, which are then analyzed by a deep learning model
+              integrated into the application's backend. This model delivers highly accurate results,
+              promptly identifying the skin condition. Subsequently, the user receives the diagnosis
+              and has the opportunity to engage with a specialized chatbot to discuss the disease,
+              treatment options, and next steps.</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <img src="{{url_for('static', filename = 'images/webapp.jpg')}}" class = "img-fluid">
+          </div>
+        </div>
+        <br>
+        <div>
+          <a class="btn btn-outline-dark" href = "{{url_for('testing')}}" role = "button">Try it out yourself!</a>
+        </div>
+        <hr class="featurette-divider">
+    
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">Features</h2>
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Highly Scalable
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Since we use mainstream technologies with minimal maintenance cost, the solution is easy to upscale.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Impactful
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Potential to impact lives of millions of people that go through these skin conditions.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Highly Accurate
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Uses state of the art deep learning methodologies with high accuracy of more than 70% while doctor’s have an average accuracy of 40-46% with naked eye.
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="col-md-5">
+            <img src="{{url_for('static', filename = 'images/confusionmatrix.png')}}" class = "img-fluid">
+          </div>
+        </div>
+        <br>
+        <div>
+          <a class="btn btn-outline-dark" href = "{{url_for('help')}}" role = "button">Understand more about our process!</a>
+        </div>
+        <hr class="featurette-divider">
+    
+        <!-- /END THE FEATURETTES -->
+    
+      </div>
+    </div>
+  
+  
+    <!-- FOOTER -->
+    <footer class="container">
+      <p class="float-end"><a href="#">Back to top</a></p>
+    </footer>
+  </main>
+{% endblock %}

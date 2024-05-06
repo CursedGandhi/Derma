@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        body{
+            padding-top: 200px;
+        }
+    </style>
+    <title>DERMA - Test</title>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <form method = "POST" action = "{{ url_for('upload') }}" enctype = "multipart/form-data">
+            <div class="container">
+                <label for="formFile" class="form-label">Upload your picture</label>
+                <input class="form-control" type="file" name = "image" id="formFile">
+            </div>
+            <br>
+            <div class = "container align-item-center">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </main>
+{% endblock %}
