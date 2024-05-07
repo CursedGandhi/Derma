@@ -53,7 +53,7 @@ def upload():
 
     answer = disease_list[ans]
     lead_section = wikipedia.summary(answer)
-    return render_template('upload.html', answer = answer, lead_section = lead_section, img = processed_image, file_extension = file_extension)
+    return render_template('upload.html', answer = answer, lead_section = lead_section, img = processed_image)
 
 def image_to_base64(image):
     buffered = BytesIO()
@@ -75,4 +75,4 @@ def process(img):
     return(np.argmax((data)))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
