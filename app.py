@@ -17,7 +17,6 @@ def index():
 @app.route('/testing', methods=['GET', 'POST'])
 def testing():
     if request.method == 'POST':
-        # Handle the form submission here, if needed
         pass
     return render_template('testing.html')
 
@@ -46,7 +45,7 @@ def upload():
         image_stream.seek(0)  # Rewind the stream to the beginning
         # Open the image using PIL (Python Imaging Library)
         image = Image.open(image_stream)
-    # Extract file extension
+
     ans = process(image)
     processed_image = image_to_base64(image)
 
@@ -54,19 +53,18 @@ def upload():
 
     answer = disease_list[ans]
     lead_section = wikipedia.summary(answer)
-    # Optionally, you can redirect to another page after successful upload
     return render_template('upload.html', answer = answer, lead_section = lead_section, img = processed_image, file_extension = file_extension)
 
 def image_to_base64(image):
     buffered = BytesIO()
-    image.save(buffered, format="JPEG")  # Change the format if needed
+    image.save(buffered, format="JPEG")  # Change the format
     encoded_image = base64.b64encode(buffered.getvalue()).decode('utf-8')
     return encoded_image
 
 def process(img):
     model=tf.keras.models.load_model(r'model.h5')
     image_arrays = list(np.asarray(img.resize((100,75))))
-    image_arrays = np.reshape(image_arrays, (-1, 75, 100, 3))  # -1 infers batch size
+    image_arrays = np.reshape(image_arrays, (-1, 75, 100, 3))
     a = array(image_arrays)
     a = a.reshape(a.shape[0], *(75, 100, 3))
     x_train_mean = np.mean(a)
@@ -75,6 +73,6 @@ def process(img):
 
     data = model.predict(a)
     return(np.argmax((data)))
-    
+
 if __name__ == "__main__":
     app.run(debug=True)
