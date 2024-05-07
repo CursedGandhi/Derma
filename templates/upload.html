@@ -11,15 +11,21 @@
 
 {% block body %}
     <main>
-        <div class = "container align-item-center info">
-        <div class="card">
-            <h5 class="card-header">{{ answer }}</h5>
-            <div class="card-body">
-              <h5 class="card-title">Here's some more information:</h5>
-              <p class="card-text">{{ lead_section }}</p>
-              <a href="https://en.wikipedia.org/wiki/{{ answer }}" class="btn btn-primary">Read More on Wikipedia</a>
+        <div class="container align-items-center">
+        <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading">{{ answer }}</h2>
+              <p class="lead">{{ lead_section }}</p>
             </div>
+            <div class="col-md-5">
+              <img src="data:image/jpeg;base64,{{ img }}" class = "img-fluid" >
+            </div>
+          </div>
+          <br>
+        <div>
+          <a class="btn btn-outline-dark" href = "https://en.wikipedia.org/wiki/{{ answer }}" role = "button">Read More on Wikipedia</a>
         </div>
+        <hr class="featurette-divider">
         </div>
     </main>
 {% endblock %}

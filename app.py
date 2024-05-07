@@ -5,6 +5,8 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 from numpy import array
+from io import BytesIO
+import base64
 
 app = Flask(__name__)
 
@@ -35,24 +37,35 @@ def upload():
     file = request.files['image']
     if file.filename == '':
         return "No selected file"
-    
+
+
+    if file.mimetype.startswith('image'):
+        # Read the image file from memory
+        image_stream = BytesIO()
+        file.save(image_stream)
+        image_stream.seek(0)  # Rewind the stream to the beginning
+        # Open the image using PIL (Python Imaging Library)
+        image = Image.open(image_stream)
     # Extract file extension
-    _, file_extension = os.path.splitext(file.filename)
-    
-    # Save the file with a static filename 'image' and the original file extension
-    filename = 'image' + file_extension
-    file.save(os.path.join('uploads', filename))
-    ans = process(os.path.join('uploads', filename))
+    ans = process(image)
+    processed_image = image_to_base64(image)
+
     disease_list = ['Eczema', 'Melanoma', 'Atopic Dermatitis', 'Basal-cell carcinoma', 'Melanocytic nevus',  'Keratosis', 'Psoriasis', 'Seborrheic keratosis', 'Tinea Corporis', 'Molluscum contagiosum']
 
     answer = disease_list[ans]
     lead_section = wikipedia.summary(answer)
     # Optionally, you can redirect to another page after successful upload
-    return render_template('upload.html', answer = answer, lead_section = lead_section)
+    return render_template('upload.html', answer = answer, lead_section = lead_section, img = processed_image, file_extension = file_extension)
 
-def process(image_path):
+def image_to_base64(image):
+    buffered = BytesIO()
+    image.save(buffered, format="JPEG")  # Change the format if needed
+    encoded_image = base64.b64encode(buffered.getvalue()).decode('utf-8')
+    return encoded_image
+
+def process(img):
     model=tf.keras.models.load_model(r'model.h5')
-    image_arrays = list(np.asarray(Image.open(image_path).resize((100,75))))
+    image_arrays = list(np.asarray(img.resize((100,75))))
     image_arrays = np.reshape(image_arrays, (-1, 75, 100, 3))  # -1 infers batch size
     a = array(image_arrays)
     a = a.reshape(a.shape[0], *(75, 100, 3))
