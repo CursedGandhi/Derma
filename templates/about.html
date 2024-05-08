@@ -11,6 +11,27 @@
 {% block body %}
     <main>
         <br><br><br><br>
+        <div class = "container text-center frame">
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                  <img src="{{url_for('static', filename = 'images/WebApp.png')}}" class="card-img-top">
+                  <div class="card-body">
+                    <p class="card-text">Above is the architectural diagram of our <strong>Front-end</strong>.</p>
+                  </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img src="{{url_for('static', filename = 'images/Model.png')}}" class="card-img-top">
+                <div class="card-body">
+                  <p class="card-text">Above is the arechitectural diagram of our <strong>Back-end</strong>.</p>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <br><br><br><br>
         <div class="container text-center frame">
           <div class="row">
             <div class="col">
@@ -29,8 +50,8 @@
                   <p class="card-text"><strong>Loss</strong> is the measure of difference between predicted values and actual values. The goal of training is to minimize the loss value. For this model, we are using the categorical cross-entropy loss function which is used for classification problems.</p>
                   <img src = "{{url_for('static', filename = 'images/lossform.jpg')}}" class = "card-img-bottom">
                 </div>
+              </div>
             </div>
             </div>
-          </div>
     </main>
 {% endblock %}
