@@ -52,7 +52,7 @@ tensorflow
 termcolor==2.4.0
 typing_extensions==4.10.0
 urllib3==2.2.1
-waitress==3.0.0
+waitress==3.0.1
 Werkzeug==3.0.1
 wikipedia==1.4.0
 Wikipedia-API==0.6.0
